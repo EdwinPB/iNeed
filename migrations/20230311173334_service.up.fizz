@@ -1,4 +1,4 @@
-create_table("clients") {
+create_table("services") {
     t.Column("id", "uuid", {primary: true})
     t.Column("business_id", "uuid", {})
     t.Column("client_id", "uuid", {})
