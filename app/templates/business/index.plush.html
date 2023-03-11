@@ -4,7 +4,7 @@
 			<img class="h-8 w-auto" src="/assets/images/iNeed.png" alt="">
 		</a>
 		<div>
-			<a href="/" class="text-sm font-semibold leading-6 text-teal-900 pr-4">Register a Business</a>
+			<a href="/business/new" class="text-sm font-semibold leading-6 text-teal-900 pr-4">Register a Business</a>
 			<a href="/" class="text-sm font-semibold leading-6 text-gray-900">Go to Homepage <span aria-hidden="true">→</span></a>
 		</div>
 	</div>
@@ -27,9 +27,12 @@
 		<ul role="list" class="divide-y divide-gray-200">
 		<%= for (b) in businesses { %>
 			<li>
-			  <a href="#" class="block hover:bg-gray-50">
+			  <a href="#" class="flex items-center">
 				<div class="px-4 py-4 sm:px-6">
 				  <div class="flex items-center justify-between">
+					<div class="flex-shrink-0 pr-2">
+						<img class="h-16 w-16 rounded-full" src="https://secure.gravatar.com/avatar/gravatarid?s=128&amp;r=any&amp;time=43179786" class="no-grav" alt="">
+					</div>
 					<div>
 					  <p class="truncate text-sm font-medium text-indigo-600"><%= b.Name %></p>
 						<p class="truncate text-sm font-regular text-gray-800"><%= b.Description %></p>
@@ -44,7 +47,7 @@
 						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400">
 						  <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
 						</svg>
-						<%= b.ServiceTime %>
+						<%= b.Category %> 
 					  </p>
 					</div>
 					<div class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0">
@@ -52,7 +55,7 @@
 						<path fill-rule="evenodd" d="M5.75 2a.75.75 0 01.75.75V4h7V2.75a.75.75 0 011.5 0V4h.25A2.75 2.75 0 0118 6.75v8.5A2.75 2.75 0 0115.25 18H4.75A2.75 2.75 0 012 15.25v-8.5A2.75 2.75 0 014.75 4H5V2.75A.75.75 0 015.75 2zm-1 5.5c-.69 0-1.25.56-1.25 1.25v6.5c0 .69.56 1.25 1.25 1.25h10.5c.69 0 1.25-.56 1.25-1.25v-6.5c0-.69-.56-1.25-1.25-1.25H4.75z" clip-rule="evenodd" />
 					  </svg>
 					  <p>
-						<time datetime="2020-01-07"><%= b.Category %></time>
+						<time datetime="2020-01-07"><%= b.ServiceTime %></time>
 					  </p>
 					</div>
 				  </div>
