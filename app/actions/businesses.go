@@ -101,7 +101,7 @@ func (v BusinessesResource) Show(c buffalo.Context) error {
 
 	c.Set("business", business)
 
-	return c.Render(http.StatusOK, r.HTML("/businesses/show.plush.html"))
+	return c.Render(http.StatusOK, r.HTML("/business/show.plush.html"))
 }
 
 // New renders the form for creating a new Business.
@@ -143,7 +143,7 @@ func (v BusinessesResource) Create(c buffalo.Context) error {
 		// correct the input.
 		c.Set("business", business)
 
-		return c.Render(http.StatusUnprocessableEntity, r.HTML("/businesses/new.plush.html"))
+		return c.Render(http.StatusUnprocessableEntity, r.HTML("/business/new.plush.html"))
 	}
 
 	// If there are no errors set a success message
@@ -171,7 +171,7 @@ func (v BusinessesResource) Edit(c buffalo.Context) error {
 
 	c.Set("business", business)
 
-	return c.Render(http.StatusOK, r.HTML("/businesses/edit.plush.html"))
+	return c.Render(http.StatusOK, r.HTML("/business/edit.plush.html"))
 }
 
 // Update changes a Business in the DB. This function is mapped to
@@ -208,7 +208,7 @@ func (v BusinessesResource) Update(c buffalo.Context) error {
 		// correct the input.
 		c.Set("business", business)
 
-		return c.Render(http.StatusUnprocessableEntity, r.HTML("/businesses/edit.plush.html"))
+		return c.Render(http.StatusUnprocessableEntity, r.HTML("/business/edit.plush.html"))
 	}
 
 	// If there are no errors set a success message
