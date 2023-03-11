@@ -206,3 +206,19 @@ func (v ClientsResource) Destroy(c buffalo.Context) error {
 	// Redirect to the index page
 	return c.Redirect(http.StatusSeeOther, "clientsPath()")
 }
+
+func (v ClientsResource) GetServiceForClients(c buffalo.Context) error {
+	tx, ok := c.Value("tx").(*pop.Connection)
+	if !ok {
+		return fmt.Errorf("no transaction found")
+	}
+
+	services := &models.Services{}
+
+	if err := tx.Where("client_id = ?", c.Param("client_id")).All(services); err != nil {
+		return c.Error(http.StatusNotFound, err)
+	}
+
+	c.Set("services", services)
+	return c.Render(http.StatusOK, r.HTML("/business/show.plush.html"))
+}

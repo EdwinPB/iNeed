@@ -12,13 +12,10 @@ import (
 	"ineedApp/app/models"
 )
 
-// BusinessesResource is the resource for the Business model
 type BusinessesResource struct {
 	buffalo.Resource
 }
 
-// List gets all Businesses. This function is mapped to the path
-// GET /businesses
 func (v BusinessesResource) List(c buffalo.Context) error {
 	// Get the DB connection from the context
 	// tx, ok := c.Value("tx").(*pop.Connection)
@@ -39,7 +36,17 @@ func (v BusinessesResource) List(c buffalo.Context) error {
 
 	// // Add the paginator to the context so it can be used in the template.
 	// c.Set("pagination", q.Paginator)
-	// c.Set("businesses", businesses)
+	businesses := &models.Businesses{
+		{
+			ID:          uuid.Must(uuid.NewV4()),
+			Name:        "Super Clean Test",
+			Description: "We're a home clean company with more than 10 years of experience on the field.",
+			Category:    "Home Needs",
+			ServiceTime: "Monday to Friday from 9:00am to 6:00pm",
+		},
+	}
+
+	c.Set("businesses", businesses)
 
 	return c.Render(http.StatusOK, r.HTML("/business/index.plush.html"))
 }
@@ -82,19 +89,13 @@ func (v BusinessesResource) ListBussines(c buffalo.Context) error {
 	return c.Render(http.StatusOK, r.JSON(businesses))
 }
 
-// Show gets the data for one Business. This function is mapped to
-// the path GET /businesses/{business_id}
 func (v BusinessesResource) Show(c buffalo.Context) error {
-	// Get the DB connection from the context
 	tx, ok := c.Value("tx").(*pop.Connection)
 	if !ok {
 		return fmt.Errorf("no transaction found")
 	}
 
-	// Allocate an empty Business
 	business := &models.Business{}
-
-	// To find the Business the parameter business_id is used.
 	if err := tx.Find(business, c.Param("business_id")); err != nil {
 		return c.Error(http.StatusNotFound, err)
 	}
@@ -104,65 +105,62 @@ func (v BusinessesResource) Show(c buffalo.Context) error {
 	return c.Render(http.StatusOK, r.HTML("/business/show.plush.html"))
 }
 
-// New renders the form for creating a new Business.
-// This function is mapped to the path GET /businesses/new
+func (v BusinessesResource) GetServiceForBusiness(c buffalo.Context) error {
+	tx, ok := c.Value("tx").(*pop.Connection)
+	if !ok {
+		return fmt.Errorf("no transaction found")
+	}
+
+	services := &models.Services{}
+
+	if err := tx.Where("business_id = ?", c.Param("business_id")).All(services); err != nil {
+		return c.Error(http.StatusNotFound, err)
+	}
+
+	c.Set("services", services)
+	return c.Render(http.StatusOK, r.HTML("/business/show.plush.html"))
+}
+
 func (v BusinessesResource) New(c buffalo.Context) error {
 	c.Set("business", &models.Business{})
 
-	return c.Render(http.StatusOK, r.HTML("/businesses/new.plush.html"))
+	return c.Render(http.StatusOK, r.HTML("/business/new.plush.html"))
 }
 
-// Create adds a Business to the DB. This function is mapped to the
-// path POST /businesses
 func (v BusinessesResource) Create(c buffalo.Context) error {
-	// Allocate an empty Business
-	business := &models.Business{}
+	// business := &models.Business{}
 
-	// Bind business to the html form elements
-	if err := c.Bind(business); err != nil {
-		return err
-	}
+	// if err := c.Bind(business); err != nil {
+	// 	return err
+	// }
 
-	// Get the DB connection from the context
-	tx, ok := c.Value("tx").(*pop.Connection)
-	if !ok {
-		return fmt.Errorf("no transaction found")
-	}
+	// tx, ok := c.Value("tx").(*pop.Connection)
+	// if !ok {
+	// 	return fmt.Errorf("no transaction found")
+	// }
 
-	// Validate the data from the html form
-	verrs, err := tx.ValidateAndCreate(business)
-	if err != nil {
-		return err
-	}
+	// verrs, err := tx.ValidateAndCreate(business)
+	// if err != nil {
+	// 	return err
+	// }
 
-	if verrs.HasAny() {
-		// Make the errors available inside the html template
-		c.Set("errors", verrs)
+	// if verrs.HasAny() {
+	// 	c.Set("errors", verrs)
+	// 	c.Set("business", business)
+	// 	return c.Render(http.StatusUnprocessableEntity, r.HTML("/business/new.plush.html"))
+	// }
+	fmt.Println("------createBusinessPath")
 
-		// Render again the new.html template that the user can
-		// correct the input.
-		c.Set("business", business)
-
-		return c.Render(http.StatusUnprocessableEntity, r.HTML("/business/new.plush.html"))
-	}
-
-	// If there are no errors set a success message
-	c.Flash().Add("success", "business.created.success")
-
-	// and redirect to the show page
-	return c.Redirect(http.StatusSeeOther, "businessPath()", render.Data{"business_id": business.ID})
+	// c.Flash().Add("success", "business.created.success")
+	return c.Render(http.StatusOK, r.HTML("/business/index.plush.html"))
 }
 
-// Edit renders a edit form for a Business. This function is
-// mapped to the path GET /businesses/{business_id}/edit
 func (v BusinessesResource) Edit(c buffalo.Context) error {
-	// Get the DB connection from the context
 	tx, ok := c.Value("tx").(*pop.Connection)
 	if !ok {
 		return fmt.Errorf("no transaction found")
 	}
 
-	// Allocate an empty Business
 	business := &models.Business{}
 
 	if err := tx.Find(business, c.Param("business_id")); err != nil {
@@ -170,27 +168,21 @@ func (v BusinessesResource) Edit(c buffalo.Context) error {
 	}
 
 	c.Set("business", business)
-
 	return c.Render(http.StatusOK, r.HTML("/business/edit.plush.html"))
 }
 
-// Update changes a Business in the DB. This function is mapped to
-// the path PUT /businesses/{business_id}
 func (v BusinessesResource) Update(c buffalo.Context) error {
-	// Get the DB connection from the context
 	tx, ok := c.Value("tx").(*pop.Connection)
 	if !ok {
 		return fmt.Errorf("no transaction found")
 	}
 
-	// Allocate an empty Business
 	business := &models.Business{}
 
 	if err := tx.Find(business, c.Param("business_id")); err != nil {
 		return c.Error(http.StatusNotFound, err)
 	}
 
-	// Bind Business to the html form elements
 	if err := c.Bind(business); err != nil {
 		return err
 	}
@@ -201,20 +193,12 @@ func (v BusinessesResource) Update(c buffalo.Context) error {
 	}
 
 	if verrs.HasAny() {
-		// Make the errors available inside the html template
 		c.Set("errors", verrs)
-
-		// Render again the edit.html template that the user can
-		// correct the input.
 		c.Set("business", business)
-
 		return c.Render(http.StatusUnprocessableEntity, r.HTML("/business/edit.plush.html"))
 	}
 
-	// If there are no errors set a success message
 	c.Flash().Add("success", "business.updated.success")
-
-	// and redirect to the show page
 	return c.Redirect(http.StatusSeeOther, "businessPath()", render.Data{"business_id": business.ID})
 }
 

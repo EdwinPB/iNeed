@@ -22,9 +22,11 @@ func setRoutes(root *buffalo.App) {
 
 	// API to access business info
 	business := actions.BusinessesResource{}
-	businessGroup := root.Group("/bussines")
-	businessGroup.GET("/", business.ListBussines)
+	businessGroup := root.Group("/business")
+	// businessGroup.GET("/", business.ListBussines)
 	businessGroup.GET("/list", business.List)
+	businessGroup.GET("/new", business.New)
+	businessGroup.POST("/create", business.Create).Name("createBusinessPath")
 
 	root.ServeFiles("/", http.FS(public.FS()))
 }
