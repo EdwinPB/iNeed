@@ -28,7 +28,7 @@ func (v BusinessesResource) List(c buffalo.Context) error {
 	}
 
 	defaults := models.Businesses{
-		{Name: "Beauty Nails", Description: "Get your nails done quickly! We're a professional team of fashionist.", Phone: "3045421621", Img: "nail", Stars: 0, Category: "Style"},
+		{Name: "Beauty Nails", Description: "Get your nails done quickly! We're a professional team of fashionist.", Phone: "3045421621", Img: "nail", Stars: 0, Category: "Style", ServiceTime: "Mon to Fri from 9:00am to 6:00pm"},
 		{Name: "Plumber 24/7", Description: "Got a leak?, we're a 24 hourse plumber team. Synk, Dishwasher, Toilet and all kind", Phone: "3045421621", Img: "plumber", Stars: 4, Category: "Home Needs"},
 		{Name: "FIXAQUA - Barranquilla", Description: "More than 25 years in the bussiness fixing plumb issues", Phone: "3045421621", Img: "plumber", Stars: 5, Category: "Home Needs"},
 		{Name: "Pool's Clean", Description: "Cleaning pool's since 1966, contact our service now!", Phone: "3045421621", Img: "pool", Stars: 5, Category: "Home Needs"},
@@ -59,7 +59,7 @@ func (v BusinessesResource) ListBussines(c buffalo.Context) error {
 	}
 
 	defaults := models.Businesses{
-		{Name: "Beauty Nails", Description: "Get your nails done quickly! We're a professional team of fashionist.", Phone: "3045421621", Img: "nail", Stars: 0, Category: "Style"},
+		{Name: "Beauty Nails", Description: "Get your nails done quickly! We're a professional team of fashionist.", Phone: "3045421621", Img: "nail", Stars: 0, Category: "Style", ServiceTime: "Mon to Fri from 9:00am to 6:00pm"},
 		{Name: "Plumber 24/7", Description: "Got a leak?, we're a 24 hourse plumber team. Synk, Dishwasher, Toilet and all kind", Phone: "3045421621", Img: "plumber", Stars: 4, Category: "Home Needs"},
 		{Name: "FIXAQUA - Barranquilla", Description: "More than 25 years in the bussiness fixing plumb issues", Phone: "3045421621", Img: "plumber", Stars: 5, Category: "Home Needs"},
 		{Name: "Pool's Clean", Description: "Cleaning pool's since 1966, contact our service now!", Phone: "3045421621", Img: "pool", Stars: 5, Category: "Home Needs"},
