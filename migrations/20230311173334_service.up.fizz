@@ -1,0 +1,11 @@
+create_table("clients") {
+    t.Column("id", "uuid", {primary: true})
+    t.Column("business_id", "uuid", {})
+    t.Column("client_id", "uuid", {})
+    t.Column("status", "string", {})
+    t.Timestamps()
+
+    t.ForeignKey("business_id", {"businesses": ["id"]}, {"on_delete": "cascade"})
+    t.ForeignKey("client_id", {"clients": ["id"]}, {"on_delete": "cascade"})
+}
+

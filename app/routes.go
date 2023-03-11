@@ -1,10 +1,9 @@
 package app
 
 import (
-	"fmt"
-	"io"
 	"net/http"
 
+	"ineedApp/app/actions"
 	"ineedApp/app/actions/home"
 	"ineedApp/app/middleware"
 	"ineedApp/public"
@@ -20,15 +19,11 @@ func setRoutes(root *buffalo.App) {
 	root.Use(middleware.CSRF)
 
 	root.GET("/", home.Index)
-	root.POST("/test/", func(c buffalo.Context) error {
-		b, err := io.ReadAll(c.Request().Body)
-		if err != nil {
-			c.Logger().Errorf("error getting body %v", err)
-		}
 
-		fmt.Println("---->", string(b))
+	// API to access business info
+	business := actions.BusinessesResource{}
+	businessGroup := root.Group("/bussines")
+	businessGroup.GET("/", business.ListBussines)
 
-		return c.Render(http.StatusOK, nil)
-	})
 	root.ServeFiles("/", http.FS(public.FS()))
 }
