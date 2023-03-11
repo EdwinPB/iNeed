@@ -17,20 +17,27 @@ type BusinessesResource struct {
 }
 
 func (v BusinessesResource) List(c buffalo.Context) error {
-	tx, ok := c.Value("tx").(*pop.Connection)
-	if !ok {
-		return fmt.Errorf("no transaction found")
-	}
+	// Get the DB connection from the context
+	// tx, ok := c.Value("tx").(*pop.Connection)
+	// if !ok {
+	// 	return fmt.Errorf("no transaction found")
+	// }
 
-	businesses := &models.Businesses{}
+	// businesses := &models.Businesses{}
 
-	q := tx.PaginateFromParams(c.Params())
-	if err := q.All(businesses); err != nil {
-		return err
-	}
+	// // Paginate results. Params "page" and "per_page" control pagination.
+	// // Default values are "page=1" and "per_page=20".
+	// q := tx.PaginateFromParams(c.Params())
 
-	c.Set("pagination", q.Paginator)
-	c.Set("businesses", businesses)
+	// // Retrieve all Businesses from the DB
+	// if err := q.All(businesses); err != nil {
+	// 	return err
+	// }
+
+	// // Add the paginator to the context so it can be used in the template.
+	// c.Set("pagination", q.Paginator)
+	// c.Set("businesses", businesses)
+
 	return c.Render(http.StatusOK, r.HTML("/business/index.plush.html"))
 }
 
