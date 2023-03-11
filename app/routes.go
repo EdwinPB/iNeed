@@ -24,6 +24,7 @@ func setRoutes(root *buffalo.App) {
 	business := actions.BusinessesResource{}
 	businessGroup := root.Group("/bussines")
 	businessGroup.GET("/", business.ListBussines)
+	businessGroup.GET("/list", business.List)
 
 	root.ServeFiles("/", http.FS(public.FS()))
 }
