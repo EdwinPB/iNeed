@@ -28,14 +28,14 @@ func (v BusinessesResource) List(c buffalo.Context) error {
 	}
 
 	defaults := models.Businesses{
-		{Name: "Need nails", Description: "get your nails done!. professional, top, and fashionist.", Phone: "3045421621", Img: "nail", Stars: 0, Category: "Style"},
-		{Name: "Plumber", Description: "got a leak?, plumber 24 Hours. synk, dishwasher, toilet and all kind", Phone: "3045421621", Img: "plumber", Stars: 4, Category: "Home Needs"},
-		{Name: "FIXAQUA - Barranquilla", Description: "more than 25 years in the bussiness", Phone: "3045421621", Img: "plumber", Stars: 5, Category: "Home Needs"},
-		{Name: "Piscinas", Description: "cleaning pool's since 1966", Phone: "3045421621", Img: "pool", Stars: 5, Category: "Home Needs"},
-		{Name: "Vikings look", Description: "best haircuts looks for men", Phone: "3045421621", Img: "barber_shop", Stars: 5, Category: "Style"},
-		{Name: "Makeupme Over", Description: "MakeUp experts, for all kind of events", Phone: "3045421621", Img: "makeup", Stars: 5, Category: "Style"},
-		{Name: "MB Cejas Y Pestañas", Description: "Microblading for thickert eye brows, lashes all kind, shape and color", Phone: "3045421621", Img: "makeup", Stars: 5, Category: "Style"},
-		{Name: "Barber", Description: "this is a description", Phone: "3045421621", Img: "barber_shop", Stars: 0, Category: "Style"},
+		{Name: "Beauty Nails", Description: "Get your nails done quickly! We're a professional team of fashionist.", Phone: "3045421621", Img: "nail", Stars: 0, Category: "Style"},
+		{Name: "Plumber 24/7", Description: "Got a leak?, we're a 24 hourse plumber team. Synk, Dishwasher, Toilet and all kind", Phone: "3045421621", Img: "plumber", Stars: 4, Category: "Home Needs"},
+		{Name: "FIXAQUA - Barranquilla", Description: "More than 25 years in the bussiness fixing plumb issues", Phone: "3045421621", Img: "plumber", Stars: 5, Category: "Home Needs"},
+		{Name: "Pool's Clean", Description: "Cleaning pool's since 1966, contact our service now!", Phone: "3045421621", Img: "pool", Stars: 5, Category: "Home Needs"},
+		{Name: "Vikings Look Barbershop", Description: "The best and moderns haircuts for men.", Phone: "3045421621", Img: "barber_shop", Stars: 5, Category: "Style"},
+		{Name: "Makeupme Over", Description: "MakeUp experts, for all kind of events, hire us.", Phone: "3045421621", Img: "makeup", Stars: 5, Category: "Style"},
+		{Name: "MB Eye Brows", Description: "Microblading for thickert eye brows, lashes all kind, shape and color", Phone: "3045421621", Img: "makeup", Stars: 5, Category: "Style"},
+		{Name: "Barberin", Description: "I'm a experienced barber with more than 10 years of experience.", Phone: "3045421621", Img: "barber_shop", Stars: 0, Category: "Style"},
 	}
 
 	businesses = append(businesses, defaults...)
@@ -59,14 +59,14 @@ func (v BusinessesResource) ListBussines(c buffalo.Context) error {
 	}
 
 	defaults := models.Businesses{
-		{Name: "Need nails", Description: "get your nails done!. professional, top, and fashionist.", Phone: "3045421621", Img: "nail", Stars: 0, Category: "Style"},
-		{Name: "Plumber", Description: "got a leak?, plumber 24 Hours. synk, dishwasher, toilet and all kind", Phone: "3045421621", Img: "plumber", Stars: 4, Category: "Home Needs"},
-		{Name: "FIXAQUA - Barranquilla", Description: "more than 25 years in the bussiness", Phone: "3045421621", Img: "plumber", Stars: 5, Category: "Home Needs"},
-		{Name: "Piscinas", Description: "cleaning pool's since 1966", Phone: "3045421621", Img: "pool", Stars: 5, Category: "Home Needs"},
-		{Name: "Vikings look", Description: "best haircuts looks for men", Phone: "3045421621", Img: "barber_shop", Stars: 5, Category: "Style"},
-		{Name: "Makeupme Over", Description: "MakeUp experts, for all kind of events", Phone: "3045421621", Img: "makeup", Stars: 5, Category: "Style"},
-		{Name: "MB Cejas Y Pestañas", Description: "Microblading for thickert eye brows, lashes all kind, shape and color", Phone: "3045421621", Img: "makeup", Stars: 5, Category: "Style"},
-		{Name: "Barber", Description: "this is a description", Phone: "3045421621", Img: "barber_shop", Stars: 0, Category: "Style"},
+		{Name: "Beauty Nails", Description: "Get your nails done quickly! We're a professional team of fashionist.", Phone: "3045421621", Img: "nail", Stars: 0, Category: "Style"},
+		{Name: "Plumber 24/7", Description: "Got a leak?, we're a 24 hourse plumber team. Synk, Dishwasher, Toilet and all kind", Phone: "3045421621", Img: "plumber", Stars: 4, Category: "Home Needs"},
+		{Name: "FIXAQUA - Barranquilla", Description: "More than 25 years in the bussiness fixing plumb issues", Phone: "3045421621", Img: "plumber", Stars: 5, Category: "Home Needs"},
+		{Name: "Pool's Clean", Description: "Cleaning pool's since 1966, contact our service now!", Phone: "3045421621", Img: "pool", Stars: 5, Category: "Home Needs"},
+		{Name: "Vikings Look Barbershop", Description: "The best and moderns haircuts for men.", Phone: "3045421621", Img: "barber_shop", Stars: 5, Category: "Style"},
+		{Name: "Makeupme Over", Description: "MakeUp experts, for all kind of events, hire us.", Phone: "3045421621", Img: "makeup", Stars: 5, Category: "Style"},
+		{Name: "MB Eye Brows", Description: "Microblading for thickert eye brows, lashes all kind, shape and color", Phone: "3045421621", Img: "makeup", Stars: 5, Category: "Style"},
+		{Name: "Barberin", Description: "I'm a experienced barber with more than 10 years of experience.", Phone: "3045421621", Img: "barber_shop", Stars: 0, Category: "Style"},
 	}
 
 	businesses = append(businesses, defaults...)
