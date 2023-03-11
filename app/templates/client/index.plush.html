@@ -1,0 +1,37 @@
+<div class="py-4 mb-2">
+	<h3 class="d-inline-block">Clients</h3>
+	<div class="float-right">
+		<%= linkTo(newClientsPath(), {class: "btn btn-primary"}) { %>
+		Create New Client
+		<% } %>
+	</div>
+</div>
+
+<table class="table table-hover table-bordered">
+	<thead class="thead-light">
+		<th>ID</th>
+		<th>CreatedAt</th>
+		<th>UpdatedAt</th>
+		<th>&nbsp;</th>
+	</thead>
+	<tbody>
+		<%= for (client) in clients { %>
+		<tr>
+			<td class="align-middle"><%= client.ID %></td>
+			<td class="align-middle"><%= client.CreatedAt %></td>
+			<td class="align-middle"><%= client.UpdatedAt %></td>
+			<td>
+				<div class="float-right">
+					<%= linkTo(clientPath({ client_id: client.ID }), {class: "btn btn-info", body: "View"}) %>
+					<%= linkTo(editClientPath({ client_id: client.ID }), {class: "btn btn-warning", body: "Edit"}) %>
+					<%= linkTo(clientPath({ client_id: client.ID }), {class: "btn btn-danger", "data-method": "DELETE", "data-confirm": "Are you sure?", body: "Destroy"}) %>
+				</div>
+			</td>
+		</tr>
+		<% } %>
+	</tbody>
+</table>
+
+<div class="text-center">
+	<%= paginator(pagination) %>
+</div>

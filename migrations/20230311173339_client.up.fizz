@@ -1,0 +1,6 @@
+create_table("clients") {
+    t.Column("id", "uuid", {primary: true})
+    t.Column("address", "string", {})
+    t.Column("phone", "string", {})
+    t.Timestamps()
+}
