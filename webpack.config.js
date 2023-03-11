@@ -10,12 +10,12 @@ const configurator = {
   entries: function(){
     var entries = {
       application: [
-        './app/assets/css/application.scss',
+        './app/assets/css/application.css',
       ],
     }
 
     Glob.sync("./app/assets/*/*.*").forEach((entry) => {
-      if (entry === './app/assets/css/application.scss') {
+      if (entry === './app/assets/css/application.css') {
         return
       }
 
@@ -61,7 +61,7 @@ const configurator = {
     return {
       rules: [
         {
-          test: /\.s[ac]ss$/,
+          test: /\.s?[ac]ss$/,
           use: [
             MiniCssExtractPlugin.loader,
             { loader: "css-loader", options: {sourceMap: true}},
@@ -73,7 +73,6 @@ const configurator = {
         { test: /\.jsx?$/,loader: "babel-loader",exclude: /node_modules/ },
         { test: /\.(woff|woff2|ttf|svg)(\?v=\d+\.\d+\.\d+)?$/,use: "url-loader"},
         { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,use: "file-loader" },
-        { test: /\.go$/, use: "gopherjs-loader"}
       ]
     }
   },
