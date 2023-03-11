@@ -1,4 +1,5 @@
-![iNeed_Banner](https://user-images.githubusercontent.com/6706036/224491945-702b7b89-90d0-4232-a9f3-899c5df297c0.png)
+
+<img width="800" alt="iNeed_Banner" src="https://user-images.githubusercontent.com/6706036/224492062-8fdd5f1e-a8f1-4fc7-8564-b8637cfee85e.png">
 
 
 # iNeed
