@@ -6,7 +6,6 @@ import (
 
 	"github.com/gobuffalo/buffalo"
 	"github.com/gobuffalo/pop/v6"
-	"github.com/gofrs/uuid"
 
 	"ineedApp/app/models"
 )
@@ -28,35 +27,49 @@ func (v BusinessesResource) List(c buffalo.Context) error {
 		return err
 	}
 
+	defaults := models.Businesses{
+		{Name: "Need nails", Description: "get your nails done!. professional, top, and fashionist.", Phone: "3045421621", Img: "nail", Stars: 0, Category: "Style"},
+		{Name: "Plumber", Description: "got a leak?, plumber 24 Hours. synk, dishwasher, toilet and all kind", Phone: "3045421621", Img: "plumber", Stars: 4, Category: "Home Needs"},
+		{Name: "FIXAQUA - Barranquilla", Description: "more than 25 years in the bussiness", Phone: "3045421621", Img: "plumber", Stars: 5, Category: "Home Needs"},
+		{Name: "Piscinas", Description: "cleaning pool's since 1966", Phone: "3045421621", Img: "pool", Stars: 5, Category: "Home Needs"},
+		{Name: "Vikings look", Description: "best haircuts looks for men", Phone: "3045421621", Img: "barber_shop", Stars: 5, Category: "Style"},
+		{Name: "Makeupme Over", Description: "MakeUp experts, for all kind of events", Phone: "3045421621", Img: "makeup", Stars: 5, Category: "Style"},
+		{Name: "MB Cejas Y Pestañas", Description: "Microblading for thickert eye brows, lashes all kind, shape and color", Phone: "3045421621", Img: "makeup", Stars: 5, Category: "Style"},
+		{Name: "Barber", Description: "this is a description", Phone: "3045421621", Img: "barber_shop", Stars: 0, Category: "Style"},
+	}
+
+	businesses = append(businesses, defaults...)
+
 	c.Set("businesses", businesses)
 
 	return c.Render(http.StatusOK, r.HTML("/business/index.plush.html"))
 }
 
 func (v BusinessesResource) ListBussines(c buffalo.Context) error {
-	businesses := &models.Businesses{
-		{
-			ID:          uuid.Must(uuid.NewV4()),
-			Name:        "Super Clean Test",
-			Description: "We're a home clean company with more than 10 years of experience on the field.",
-			Category:    "Home Needs",
-			ServiceTime: "Monday to Friday from 9:00am to 6:00pm",
-		},
-		{
-			ID:          uuid.Must(uuid.NewV4()),
-			Name:        "Super Clean 1",
-			Description: "We're a home clean company with more than 10 years of experience on the field.",
-			Category:    "Home Needs",
-			ServiceTime: "Monday to Friday from 9:00am to 6:00pm",
-		},
-		{
-			ID:          uuid.Must(uuid.NewV4()),
-			Name:        "Super Clean 2",
-			Description: "We're a home clean company with more than 10 years of experience on the field.",
-			Category:    "Home Needs",
-			ServiceTime: "Monday to Friday from 9:00am to 6:00pm",
-		},
+	tx, ok := c.Value("tx").(*pop.Connection)
+	if !ok {
+		return fmt.Errorf("no transaction found")
 	}
+
+	businesses := models.Businesses{}
+
+	q := tx.PaginateFromParams(c.Params())
+	if err := q.All(&businesses); err != nil {
+		return err
+	}
+
+	defaults := models.Businesses{
+		{Name: "Need nails", Description: "get your nails done!. professional, top, and fashionist.", Phone: "3045421621", Img: "nail", Stars: 0, Category: "Style"},
+		{Name: "Plumber", Description: "got a leak?, plumber 24 Hours. synk, dishwasher, toilet and all kind", Phone: "3045421621", Img: "plumber", Stars: 4, Category: "Home Needs"},
+		{Name: "FIXAQUA - Barranquilla", Description: "more than 25 years in the bussiness", Phone: "3045421621", Img: "plumber", Stars: 5, Category: "Home Needs"},
+		{Name: "Piscinas", Description: "cleaning pool's since 1966", Phone: "3045421621", Img: "pool", Stars: 5, Category: "Home Needs"},
+		{Name: "Vikings look", Description: "best haircuts looks for men", Phone: "3045421621", Img: "barber_shop", Stars: 5, Category: "Style"},
+		{Name: "Makeupme Over", Description: "MakeUp experts, for all kind of events", Phone: "3045421621", Img: "makeup", Stars: 5, Category: "Style"},
+		{Name: "MB Cejas Y Pestañas", Description: "Microblading for thickert eye brows, lashes all kind, shape and color", Phone: "3045421621", Img: "makeup", Stars: 5, Category: "Style"},
+		{Name: "Barber", Description: "this is a description", Phone: "3045421621", Img: "barber_shop", Stars: 0, Category: "Style"},
+	}
+
+	businesses = append(businesses, defaults...)
 
 	c.Set("businesses", businesses)
 	return c.Render(http.StatusOK, r.JSON(businesses))

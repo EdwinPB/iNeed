@@ -18,6 +18,8 @@ type Business struct {
 	Phone       string   `json:"phone" db:"phone"`
 	ServiceTime string   `json:"service_time" db:"service_time"`
 	Address     string   `json:"address" db:"address"`
+	Img         string   `json:"img" db:"-"`
+	Stars       int64    `json:"stars" db:"-"`
 	Services    Services `json:"services" has_many:"services"`
 
 	CreatedAt time.Time `json:"created_at" db:"created_at"`
