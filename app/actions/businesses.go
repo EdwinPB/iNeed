@@ -36,7 +36,17 @@ func (v BusinessesResource) List(c buffalo.Context) error {
 
 	// // Add the paginator to the context so it can be used in the template.
 	// c.Set("pagination", q.Paginator)
-	// c.Set("businesses", businesses)
+	businesses := &models.Businesses{
+		{
+			ID:          uuid.Must(uuid.NewV4()),
+			Name:        "Super Clean Test",
+			Description: "We're a home clean company with more than 10 years of experience on the field.",
+			Category:    "Home Needs",
+			ServiceTime: "Monday to Friday from 9:00am to 6:00pm",
+		},
+	}
+
+	c.Set("businesses", businesses)
 
 	return c.Render(http.StatusOK, r.HTML("/business/index.plush.html"))
 }
@@ -114,34 +124,35 @@ func (v BusinessesResource) GetServiceForBusiness(c buffalo.Context) error {
 func (v BusinessesResource) New(c buffalo.Context) error {
 	c.Set("business", &models.Business{})
 
-	return c.Render(http.StatusOK, r.HTML("/businesses/new.plush.html"))
+	return c.Render(http.StatusOK, r.HTML("/business/new.plush.html"))
 }
 
 func (v BusinessesResource) Create(c buffalo.Context) error {
-	business := &models.Business{}
+	// business := &models.Business{}
 
-	if err := c.Bind(business); err != nil {
-		return err
-	}
+	// if err := c.Bind(business); err != nil {
+	// 	return err
+	// }
 
-	tx, ok := c.Value("tx").(*pop.Connection)
-	if !ok {
-		return fmt.Errorf("no transaction found")
-	}
+	// tx, ok := c.Value("tx").(*pop.Connection)
+	// if !ok {
+	// 	return fmt.Errorf("no transaction found")
+	// }
 
-	verrs, err := tx.ValidateAndCreate(business)
-	if err != nil {
-		return err
-	}
+	// verrs, err := tx.ValidateAndCreate(business)
+	// if err != nil {
+	// 	return err
+	// }
 
-	if verrs.HasAny() {
-		c.Set("errors", verrs)
-		c.Set("business", business)
-		return c.Render(http.StatusUnprocessableEntity, r.HTML("/business/new.plush.html"))
-	}
+	// if verrs.HasAny() {
+	// 	c.Set("errors", verrs)
+	// 	c.Set("business", business)
+	// 	return c.Render(http.StatusUnprocessableEntity, r.HTML("/business/new.plush.html"))
+	// }
+	fmt.Println("------createBusinessPath")
 
-	c.Flash().Add("success", "business.created.success")
-	return c.Redirect(http.StatusSeeOther, "businessPath()", render.Data{"business_id": business.ID})
+	// c.Flash().Add("success", "business.created.success")
+	return c.Render(http.StatusOK, r.HTML("/business/index.plush.html"))
 }
 
 func (v BusinessesResource) Edit(c buffalo.Context) error {

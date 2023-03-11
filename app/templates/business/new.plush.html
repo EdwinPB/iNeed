@@ -2,7 +2,7 @@
   	<h3 class="d-inline-block">New Business</h3>
 </div>
 
-<%= formFor(business, {action: businessesPath(), method: "POST"}) { %>
-	<%= partial("businesses/form.html") %>
-	<%= linkTo(businessesPath(), {class: "btn btn-warning", "data-confirm": "Are you sure?", body: "Cancel"}) %>
+<%= formFor(business, {action: createBusinessPath(), method: "POST"}) { %>
+	<%= partial("business/form.plush.html") %>
+	<%= linkTo("/business", {class: "btn btn-warning", "data-confirm": "Are you sure?", body: "Cancel"}) %>
 <% } %>
