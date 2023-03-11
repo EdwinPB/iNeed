@@ -13,10 +13,11 @@ type Business struct {
 	ID uuid.UUID `json:"id" db:"id"`
 
 	Name        string   `json:"name" db:"name"`
-	Description string   `json:"description" db:"-"`
-	Category    string   `json:"category" db:"-"`
+	Description string   `json:"description" db:"description"`
+	Category    string   `json:"category" db:"category"`
 	Phone       string   `json:"phone" db:"phone"`
 	ServiceTime string   `json:"service_time" db:"service_time"`
+	Address     string   `json:"address" db:"address"`
 	Services    Services `json:"services" has_many:"services"`
 
 	CreatedAt time.Time `json:"created_at" db:"created_at"`

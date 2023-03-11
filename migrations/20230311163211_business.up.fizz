@@ -1,6 +1,8 @@
 create_table("businesses") {
     t.Column("id", "uuid", {primary: true})
     t.Column("name", "string", {})
+    t.Column("category", "string", {})
+    t.Column("description", "string", {})
     t.Column("phone", "string", {})
     t.Column("service_time", "string", {})
     t.Column("address", "string", {})
